@@ -1,16 +1,14 @@
 #include "CLManager.h"
 #include <iostream>
-#include "stdio.h"
+#include <assert.h>
 
 CLManager::CLManager()
 {
-    std::cout <<"CLManager()"<<std::endl;
     open();
 }
 CLManager::~CLManager()
 {
     close();
-    std::cout <<"~CLManager()"<<std::endl;
 }
 
 
@@ -40,14 +38,7 @@ get_cl_context(const cl_device_id& device)
     // Get platform and device information
     cl_int ret;
     cl_context context = clCreateContext( NULL, 1, &device, NULL, NULL, &ret);
-    if( context )
-    {
-        std::cout<<"Initialised CL context successfully\n";
-    }
-    else
-    {
-        std::cout<<"Failed to initialise cl context\n";
-    }
+    assert(context);
     return context;
 }
 
