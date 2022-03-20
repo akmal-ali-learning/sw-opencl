@@ -116,6 +116,7 @@ main(int, char**)
 {
     auto start = std::chrono::high_resolution_clock::now();
     auto cl_manager = new CLManager();
+
     size_t num_elements =1024*1024;
     auto test = new VectorAddTest(num_elements, cl_manager);
     for(int i = 0 ; i < 100; ++i)

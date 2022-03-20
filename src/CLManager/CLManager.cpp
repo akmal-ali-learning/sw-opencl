@@ -13,23 +13,30 @@ CLManager::~CLManager()
 
 
 //! @brief Get OpenCL Platform ID.
-cl_platform_id 
-get_platform_id()
+std::vector<cl_platform_id> 
+get_platforms()
 {
     cl_platform_id platform_id = nullptr;
-    cl_uint ret_num_platforms;
-    cl_int ret = clGetPlatformIDs(1, &platform_id, &ret_num_platforms);
-    return platform_id;
+    cl_uint num_platforms = 0;
+    clGetPlatformIDs(0, nullptr, &num_platforms);
+    std::vector<cl_platform_id> platforms(num_platforms,nullptr);
+    cl_int ret = clGetPlatformIDs(platforms.size(), platforms.data(), &num_platforms);
+    printf("%d platforms found\n", num_platforms);
+    return platforms;
 }
 
 //! @brief Get OpenCL Device ID.
 cl_device_id 
 get_device()
 {
-    cl_uint         ret_num_devices;
-    cl_device_id    device_id;
-    cl_int ret = clGetDeviceIDs( get_platform_id() , CL_DEVICE_TYPE_DEFAULT, 1, &device_id, &ret_num_devices);
-    return device_id;
+    cl_uint         num_devices;
+    cl_platform_id  platform = get_platforms().front();
+    cl_int ret = clGetDeviceIDs( platform, CL_DEVICE_TYPE_DEFAULT, 0, nullptr, &num_devices);
+    std::vector<cl_device_id> devices(num_devices);
+    ret = clGetDeviceIDs( platform, CL_DEVICE_TYPE_DEFAULT, devices.size(), devices.data(), &num_devices);
+    printf("%d device found\n", num_devices);
+    cl_device_id device = devices.front();
+    return device;
 }
 
 cl_context
