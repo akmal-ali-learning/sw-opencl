@@ -7,9 +7,11 @@ class CLManager
     CLManager();
     ~CLManager();
 
+    cl_context Context() const {return context;};
+
     void open();
     void close();
-    private:
+    public:
     cl_device_id device;
     cl_context   context;
     std::vector<cl_command_queue> command_queues;
