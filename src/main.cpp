@@ -3,6 +3,8 @@
 #include <memory>
 #include <assert.h>
 #include <chrono>
+#include <gtest/gtest.h>
+
 
 const char vector_add_kernel[] = R"cl(
 __kernel void vector_add(__global const int *A, __global const int *B, __global int *C) {
@@ -112,8 +114,10 @@ class VectorAddTest
 
 
 int 
-main(int, char**) 
+main(int argc , char** argv) 
 {
+
+
     auto start = std::chrono::high_resolution_clock::now();
     auto cl_manager = new CLManager();
 
@@ -130,4 +134,11 @@ main(int, char**)
 
     double time_taken_ms = (finish - start).count()/(1000.0*1000.0);
     printf("Ran succesfully in %f ms\n", time_taken_ms);
+
+    std::cout<<"Running tests \n";
+    testing::InitGoogleTest(&argc, argv);
+    int return_code = RUN_ALL_TESTS();
+    if( return_code )
+        return return_code;
+    std::cout<<"Finished Running tests \n";
 }
