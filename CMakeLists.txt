@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(akmal-opencl VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 17)
-
+include(CTest)
 
 ################################
 # GTest
 ################################
 ADD_SUBDIRECTORY(ext/googletest)
-enable_testing()
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 file(GLOB CPP_SOURCES 
@@ -32,7 +31,6 @@ endif()
 add_executable(${PROJECT_NAME} ${CPP_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} gtest_main)
-
 
 ## OPENCL
 if( ${OPENCL_SUPPORT} )
