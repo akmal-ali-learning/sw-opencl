@@ -1,5 +1,5 @@
 #include <iostream>
-#include <CLManager/CLManager.h>
+#include <opencl/CLManager/CLManager.h>
 #include <memory>
 #include <assert.h>
 #include <chrono>
@@ -113,11 +113,8 @@ class VectorAddTest
 
 
 
-int 
-main(int argc , char** argv) 
+TEST(CLManagerTest, OpenClose) 
 {
-
-
     auto start = std::chrono::high_resolution_clock::now();
     auto cl_manager = new CLManager();
 
@@ -133,12 +130,5 @@ main(int argc , char** argv)
     auto finish = std::chrono::high_resolution_clock::now();
 
     double time_taken_ms = (finish - start).count()/(1000.0*1000.0);
-    printf("Ran succesfully in %f ms\n", time_taken_ms);
-
-    std::cout<<"Running tests \n";
-    testing::InitGoogleTest(&argc, argv);
-    int return_code = RUN_ALL_TESTS();
-    if( return_code )
-        return return_code;
-    std::cout<<"Finished Running tests \n";
+    printf("CLManagerTest Ran succesfully in %f ms\n", time_taken_ms);
 }
