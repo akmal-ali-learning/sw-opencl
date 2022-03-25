@@ -5,11 +5,16 @@ Personal OpenCL learning repository
 
 ## Implemented
 * Basic example for setting up OpenCL context and executing vectorAdd kernel.
+* CMake build script
+* Unit testing using googletest
+* Github CI/CD workflow using CMake/CTest
 
 ## Future work
 * Explore host+device execution of cl work
 * Executing CL kernels on FPGA
 * Executing CL kernels on NPU
+* Use clang-format for consistent formatting.
+* Using oclgrind as software backend for testing code.
 
 ## Setting up
 * Require c++ compiler, cmake and opencl sdk.
