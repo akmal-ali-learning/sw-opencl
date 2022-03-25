@@ -56,8 +56,9 @@ CLManager::open()
     command_queues = {};
     device  = get_device();
     context = get_cl_context(device);
+
     cl_int ret;
-    cl_command_queue command_queue = clCreateCommandQueue(context, device, 0, &ret);
+    cl_command_queue command_queue = clCreateCommandQueueWithProperties(context, device, nullptr, &ret);
     command_queues.push_back(command_queue);
 }
 
