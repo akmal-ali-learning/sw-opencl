@@ -1,4 +1,6 @@
 # sw-opencl
+![CMake Build status](https://github.com/akmal-ali/sw-opencl/actions/workflows/cmake.yml/badge.svg)
+
 Personal OpenCL learning repository
 
 ## Implemented
